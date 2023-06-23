@@ -1,0 +1,51 @@
+body {
+	background-image: url("../../assets/background.jpg");
+	background-size: cover;
+}
+.min-cover{
+	min-height:90vh;
+}
+.bg-white {
+	background:white !important;
+}
+
+.header-container {
+    box-shadow: 0 0 3px -1px;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 350px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px -1px;
+  padding: 15px 35px;
+  margin: auto;
+  opacity: 0.9;
+}
+
+.link-dark{
+    border-bottom: 2px solid transparent;
+}
+.link-secondary {
+	color: #6c757d;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.fa-user:before {
+  content: "\f007"; }
+.fa {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; 
+ }
+
+ .fa-30{
+ width:30px;
+ }
+
+LOGGER.info("Loading users from file: {}", filePath);

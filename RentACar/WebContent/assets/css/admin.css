@@ -1,0 +1,29 @@
+header {
+	background-color: #212529;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.form-control-dark {
+  width: 200px;
+}
+
+.navbar .form-control {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+.bgManager{
+	background:#671010;
+}
+.bgManager a.nav-link {
+	color:white !important;
+}
