@@ -9,11 +9,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import dao.UserDAO;
 import entities.User;
+import enums.UserRole;
 
 @Path("/user")
 public class UserService {
@@ -37,6 +39,14 @@ public class UserService {
 	public Collection<User> allUsers() {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.findAll();
+	}
+	
+	@GET
+	@Path("/allUsersByRole")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> allUsersByRole(@QueryParam("role") UserRole role) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.getUsersByRole(role);
 	}
 	
 	@POST

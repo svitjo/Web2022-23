@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +17,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import entities.User;
+import enums.UserRole;
 
 public class UserDAO {
 	private Map<String, User> users = new HashMap<>();
 	private String contextPath;
+	
+	public String getContextPath() {
+		return contextPath;
+	}
 	
 	public UserDAO() {
 		loadUsers();
@@ -82,6 +88,31 @@ public class UserDAO {
 		}
 	}
 	
+	public Collection<User> loadUsersByRole(UserRole role) {
+	    BufferedReader reader = null;
+	    try {
+	        File file = new File(contextPath + "storage\\users.txt");
+	        reader = new BufferedReader(new FileReader(file));
+	        String json = reader.lines().collect(Collectors.joining());
+	        Collection<User> userList = new ObjectMapper().readValue(json, new TypeReference<List<User>>() {});
+
+	        return userList.stream()
+	                .filter(user -> user.getRole().equals(role))
+	                .collect(Collectors.toList());
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	        return Collections.emptyList();
+	    } finally {
+	        if (reader != null) {
+	            try {
+	                reader.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
+	
 	public User addUser(User user) {
 		File file = new File(contextPath + "storage\\users.txt");
 		
@@ -116,5 +147,11 @@ public class UserDAO {
 		}
 		maxId++;
 		return maxId;
+	}
+	
+	public List<User> getUsersByRole(UserRole role) {
+	    return users.values().stream()
+	            .filter(user -> user.getRole() == role)
+	            .collect(Collectors.toList());
 	}
 }
