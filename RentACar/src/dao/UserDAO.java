@@ -114,10 +114,17 @@ public class UserDAO {
 	}
 	
 	public User addUser(User user) {
-		File file = new File(contextPath + "storage\\users.txt");
 		
 		user.setId(calculateLastIndex());
 		users.put(user.getUsername(), user);
+		
+		saveUsers();
+		
+		return user;
+	}
+	
+	public void saveUsers() {
+		File file = new File(contextPath + "storage\\users.txt");
 
 		BufferedWriter writer = null;
 		try {
@@ -125,7 +132,6 @@ public class UserDAO {
 		    String json = ow.writeValueAsString(users.values());
 		    writer = new BufferedWriter(new FileWriter(file));
 		    writer.write(json);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -136,7 +142,6 @@ public class UserDAO {
 				catch (Exception e) { }
 			}
 		}
-		return user;
 	}
 	
 	private int calculateLastIndex() {
@@ -153,5 +158,21 @@ public class UserDAO {
 	    return users.values().stream()
 	            .filter(user -> user.getRole() == role)
 	            .collect(Collectors.toList());
+	}
+	
+	public User findById(int id) {
+		for(User u : users.values()) {
+			if(u.getId() == id) 
+				return u;
+		}
+		return null;
+	}
+	
+	public void updateRentACarObjectStatus(int id, boolean hasRentACarObject) {
+	    User user = findById(id);
+	    if (user != null) {
+	        user.setHasRentACarObject(hasRentACarObject);
+	        saveUsers();
+	    }
 	}
 }

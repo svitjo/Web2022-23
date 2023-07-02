@@ -49,6 +49,14 @@ public class UserService {
 		return userDao.getUsersByRole(role);
 	}
 	
+	@GET
+	@Path("/getUserById")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUserById(@QueryParam("id") int id) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.findById(id);
+	}
+	
 	@POST
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
