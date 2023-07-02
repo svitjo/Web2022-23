@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,12 +9,24 @@ import enums.OrderStatus;
 public class Order {
 	private int id;
 	private Collection<Vehicle> vehicles;
-	private RentACarObject object;
+	private int objectId;
 	private Date orderDateAndTime;
 	private String orderDuration;
 	private double orderPrice;
-	private Customer customer;
+	private int userId;
 	private OrderStatus orderStatus;
+	
+	public void addVehicle(Vehicle vehicle) {
+        vehicles.add(vehicle);
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        vehicles.remove(vehicle);
+    }
+	public Order() {
+		vehicles = new ArrayList<>();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -25,12 +38,6 @@ public class Order {
 	}
 	public void setVehicles(Collection<Vehicle> vehicles) {
 		this.vehicles = vehicles;
-	}
-	public RentACarObject getObject() {
-		return object;
-	}
-	public void setObject(RentACarObject object) {
-		this.object = object;
 	}
 	public Date getOrderDateAndTime() {
 		return orderDateAndTime;
@@ -56,11 +63,16 @@ public class Order {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public Customer getCustomer() {
-		return customer;
+	public int getObjectId() {
+		return objectId;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setObjectId(int objectId) {
+		this.objectId = objectId;
 	}
-
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 }

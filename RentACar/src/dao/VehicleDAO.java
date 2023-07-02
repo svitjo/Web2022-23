@@ -45,7 +45,7 @@ public class VehicleDAO {
 	public void loadVehicles() {
 		BufferedReader reader = null;
 		try {
-			File file = new File(contextPath + "storage\\vehicles.txt");
+			File file = new File(contextPath + "storage\\vehicle.txt");
 			reader = new BufferedReader(new FileReader(file));
 			String json = reader.lines().collect(Collectors.joining());
 			System.out.println(json);
