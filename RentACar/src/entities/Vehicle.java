@@ -6,10 +6,11 @@ import enums.VehicleAvailability;
 import enums.VehicleType;
 
 public class Vehicle {
+	private int id;
 	private String vehicleMark;
 	private double vehiclePrice;
 	private VehicleType vehicleType;
-	private RentACarObject vehicleObject;
+	private int rentacarobjectID;
 	private double consumption;
 	private Transmissions vehicleTransmissions;
 	private FuelType fuelType;
@@ -35,12 +36,6 @@ public class Vehicle {
 	}
 	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
-	}
-	public RentACarObject getVehicleObject() {
-		return vehicleObject;
-	}
-	public void setVehicleObject(RentACarObject vehicleObject) {
-		this.vehicleObject = vehicleObject;
 	}
 	public double getConsumption() {
 		return consumption;
@@ -89,6 +84,18 @@ public class Vehicle {
 	}
 	public void setStatus(VehicleAvailability status) {
 		this.status = status;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getRentacarobjectID() {
+		return rentacarobjectID;
+	}
+	public void setRentacarobjectID(int rentacarobjectID) {
+		this.rentacarobjectID = rentacarobjectID;
 	}
 
 }

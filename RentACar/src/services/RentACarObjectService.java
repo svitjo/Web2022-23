@@ -9,12 +9,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import dao.RentACarObjectDAO;
 import dao.UserDAO;
 import entities.RentACarObject;
+import entities.Vehicle;
 
 @Path("/rentacarobject")
 public class RentACarObjectService {
@@ -70,5 +72,13 @@ public class RentACarObjectService {
         userDao.updateRentACarObjectStatus(managerId, true);
 
 		return r;
+	}
+	
+	@POST
+	@Path("/addVehicle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addVehicleToRentACarObject(@QueryParam("id") int id, Vehicle vehicle) {
+	    RentACarObjectDAO rentACarObjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
+	    rentACarObjectDAO.addVehicleToRentACarObject(id, vehicle);   
 	}
 }

@@ -18,9 +18,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 import entities.RentACarObject;
 import entities.User;
+import entities.Vehicle;
 
 public class RentACarObjectDAO {
-		private Map<String, RentACarObject> rentacarobjects = new HashMap<>();
+		private Map<Integer, RentACarObject> rentacarobjects = new HashMap<>();
 		private String contextPath;
 		private UserDAO userDao;
 
@@ -59,7 +60,7 @@ public class RentACarObjectDAO {
 				Collection<RentACarObject> rList = new ObjectMapper().readValue(json, new TypeReference<List<RentACarObject>>(){});
 				
 				for(RentACarObject r : rList) {
-					rentacarobjects.put(r.getObjectName(), r);
+					rentacarobjects.put(r.getId(), r);
 				}
 			} catch (Exception ex) {
 			} finally {
@@ -73,10 +74,16 @@ public class RentACarObjectDAO {
 		}
 		
 		public RentACarObject addRentACarObject(RentACarObject rentacarobject) {
-			File file = new File(contextPath + "storage\\rentacarobjects.txt");
-			rentacarobject.setId(calculateLastIndex());
-			rentacarobjects.put(rentacarobject.getObjectName(), rentacarobject);
 			
+			rentacarobject.setId(calculateLastIndex());
+			rentacarobjects.put(rentacarobject.getId(), rentacarobject);
+			saveRentACarObjects();
+			return rentacarobject;
+		}
+		
+		public void saveRentACarObjects() {
+			File file = new File(contextPath + "storage\\rentacarobjects.txt");
+		
 			BufferedWriter writer = null;
 			try {
 			    ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -93,10 +100,7 @@ public class RentACarObjectDAO {
 					catch (Exception e) { }
 				}
 			}
-			return rentacarobject;
 		}
-		
-		
 
 		private int calculateLastIndex() {
 			int maxId = -1;
@@ -106,5 +110,14 @@ public class RentACarObjectDAO {
 			}
 			maxId++;
 			return maxId;
+		}
+		
+		public void addVehicleToRentACarObject(int rentacarobjectId, Vehicle vehicle) {
+		    RentACarObject rentACarObject = rentacarobjects.get(rentacarobjectId);
+		    if (rentACarObject != null) {
+		        vehicle.setRentacarobjectID(rentacarobjectId);
+		        rentACarObject.getVehicle().add(vehicle);
+		        saveRentACarObjects();
+		    }
 		}
 }
