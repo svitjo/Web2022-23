@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -80,5 +81,23 @@ public class RentACarObjectService {
 	public void addVehicleToRentACarObject(@QueryParam("id") int id, Vehicle vehicle) {
 	    RentACarObjectDAO rentACarObjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
 	    rentACarObjectDAO.addVehicleToRentACarObject(id, vehicle);   
+	}
+	
+	@POST
+	@Path("/update")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public RentACarObject update(RentACarObject r) {
+		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
+		rentacarobjectDAO.updateRentACarObject(r);
+		return r;
+	}
+	
+	@GET
+	@Path("/sortedRentACarObjects")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<RentACarObject> sortedRentACarObjects() {
+		RentACarObjectDAO rentACarObjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
+		return rentACarObjectDAO.sortRentACarObjects();
 	}
 }

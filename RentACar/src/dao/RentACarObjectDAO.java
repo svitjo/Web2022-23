@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import entities.RentACarObject;
 import entities.User;
 import entities.Vehicle;
+import enums.ObjectStatus;
 
 public class RentACarObjectDAO {
 		private Map<Integer, RentACarObject> rentacarobjects = new HashMap<>();
@@ -81,6 +82,16 @@ public class RentACarObjectDAO {
 			return rentacarobject;
 		}
 		
+		public RentACarObject updateRentACarObject(RentACarObject rentacarobject) {
+		    if (rentacarobjects.containsKey(rentacarobject.getId())) {
+		        rentacarobjects.put(rentacarobject.getId(), rentacarobject);
+		        saveRentACarObjects();
+		        return rentacarobject;
+		    } else {
+		        throw new IllegalArgumentException("RentACarObject with ID " + rentacarobject.getId() + " does not exist.");
+		    }
+		}
+		
 		public void saveRentACarObjects() {
 			File file = new File(contextPath + "storage\\rentacarobjects.txt");
 		
@@ -120,4 +131,23 @@ public class RentACarObjectDAO {
 		        saveRentACarObjects();
 		    }
 		}
+		
+		public List<RentACarObject> sortRentACarObjects() {
+	        List<RentACarObject> allObjects = new ArrayList<>(rentacarobjects.values());
+	        List<RentACarObject> sortedObjects = new ArrayList<>();
+
+	        List<RentACarObject> openStatusObjects = new ArrayList<>();
+	        List<RentACarObject> closeStatusObjects = new ArrayList<>();
+	        for (RentACarObject obj : allObjects) {
+	            if (obj.getObjectStatus() == ObjectStatus.OPEN) {
+	                openStatusObjects.add(obj);
+	            } else if (obj.getObjectStatus() == ObjectStatus.CLOSE) {
+	                closeStatusObjects.add(obj);
+	            }
+	        }
+	        sortedObjects.addAll(openStatusObjects);
+	        sortedObjects.addAll(closeStatusObjects);
+
+	        return sortedObjects;
+	    }
 }
