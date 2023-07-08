@@ -2,10 +2,14 @@ const Homepage = { template: '<homepage></homepage>' }
 const Login = { template: '<login></login>' }
 const Register = { template: '<register></register>' }
 const Manager = {template: '<manager></manager>'}
+const ManagerHome = {template: '<manager-home></manager-home>'}
 const Customer = {template: '<customer></customer>'}
+const CustomerHome = {template: '<customer-home></customer-home>'}
 const Admin = {template: '<admin></admin>'}
 const AdminManagers = {template: '<admin-managers></admin-managers>'}
 const AdminCustomers = {template: '<admin-customers></admin-customers>'}
+const RentACarObjectView = {template: '<rentacarobject-view></rentacarobject-view>'}
+const RentACarObjectViewWithHeader = {template: '<rentacarobject-view-wh></rentacarobject-view-wh>'}
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -25,6 +29,17 @@ const router = new VueRouter({
 		    		}
 		         }
 		    },
+		    {
+	    		path: '/rentacarobject/:id',
+	    		component:RentACarObjectViewWithHeader,
+		    	beforeEnter: (to, from, next) => {
+		    		if(isLogged()){
+		    			next("/"+getCurrentRole());
+		    		} else {
+		    			next();
+		    		}
+		    	}
+	    	},
 		    { 
 		    	path: '/register', 
 		    	component: Register,  
@@ -39,6 +54,12 @@ const router = new VueRouter({
 		    { 
 		    	path: '/manager', 
 		    	component: Manager,
+		    	children: [
+		    		{
+		    			path: '',
+		    			component: ManagerHome
+		    		}
+		    	],
 		    	beforeEnter: (to, from, next) => {
 		    		if(loggedAs("MANAGER")){
 		    			next();
@@ -50,6 +71,12 @@ const router = new VueRouter({
 		    { 
 		    	path: '/customer', 
 		    	component: Customer,
+		    	children: [
+		    		{
+		    			path: '',
+		    			component: CustomerHome
+		    		}
+		    	],
 		    	beforeEnter: (to, from, next) => {
 		    		if(loggedAs("CUSTOMER")){
 		    			next();
