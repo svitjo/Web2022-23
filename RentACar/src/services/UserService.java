@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -81,6 +82,16 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		userDao.updateUser(u);
 		return u;
+	}
+	
+	
+	@DELETE
+	@Path("/delete")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void delete(@QueryParam("id") int id) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		userDao.deleteUserById(id);
 	}
 	
 	@POST

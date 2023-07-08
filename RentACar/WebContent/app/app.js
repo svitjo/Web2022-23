@@ -4,6 +4,8 @@ const Register = { template: '<register></register>' }
 const Manager = {template: '<manager></manager>'}
 const Customer = {template: '<customer></customer>'}
 const Admin = {template: '<admin></admin>'}
+const AdminManagers = {template: '<admin-managers></admin-managers>'}
+const AdminCustomers = {template: '<admin-customers></admin-customers>'}
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -59,6 +61,17 @@ const router = new VueRouter({
 		    { 
 		    	path: '/admin', 
 		    	component: Admin,
+		    	children: [
+		    		
+		    		{
+		    			path: 'managers',
+		    			component:AdminManagers,
+		    		},
+		    		{
+		    			path: 'customers',
+		    			component:AdminCustomers,
+		    		},
+		    	],
 		    	beforeEnter: (to, from, next) => {
 		    		if(loggedAs("ADMIN")){
 		    			next();

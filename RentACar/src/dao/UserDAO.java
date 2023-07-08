@@ -122,6 +122,13 @@ public class UserDAO {
 		return user;
 	}
 	
+	public void deleteUserById(int id) {
+	    User user = users.remove(id);
+	    if (user != null) {
+	        saveUsers();
+	    }
+	}
+	
 	public User updateUser(User user) {
 	    if (users.containsKey(user.getId())) {
 	        users.put(user.getId(), user);
