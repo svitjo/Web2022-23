@@ -16,11 +16,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import entities.RentACarObject;
 import entities.User;
 import enums.UserRole;
 
 public class UserDAO {
-	private Map<String, User> users = new HashMap<>();
+	private Map<Integer, User> users = new HashMap<>();
 	private String contextPath;
 	
 	public String getContextPath() {
@@ -74,7 +75,7 @@ public class UserDAO {
 			Collection<User> uList = new ObjectMapper().readValue(json, new TypeReference<List<User>>(){});
 			
 			for(User u : uList) {
-				users.put(u.getUsername(), u);
+				users.put(u.getId(), u);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -114,13 +115,20 @@ public class UserDAO {
 	}
 	
 	public User addUser(User user) {
-		
 		user.setId(calculateLastIndex());
-		users.put(user.getUsername(), user);
-		
+		users.put(user.getId(), user);	
 		saveUsers();
-		
 		return user;
+	}
+	
+	public User updateUser(User user) {
+	    if (users.containsKey(user.getId())) {
+	        users.put(user.getId(), user);
+	        saveUsers();
+	        return user;
+	    } else {
+	        throw new IllegalArgumentException("RentACarObject with ID " + user.getId() + " does not exist.");
+	    }
 	}
 	
 	public void saveUsers() {

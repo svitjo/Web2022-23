@@ -92,7 +92,7 @@ public class VehicleDAO {
 		}
 		return vehicle;
 	}
-
+	
 	private int calculateLastIndex() {
 		int maxId = -1;
 		for(Vehicle r : vehicles.values()) {

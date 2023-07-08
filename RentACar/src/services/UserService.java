@@ -13,7 +13,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import dao.RentACarObjectDAO;
 import dao.UserDAO;
+import entities.RentACarObject;
 import entities.User;
 import enums.UserRole;
 
@@ -69,6 +71,16 @@ public class UserService {
 			return u;
 		}
 		return null;
+	}
+	
+	@POST
+	@Path("/update")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public User update(User u) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		userDao.updateUser(u);
+		return u;
 	}
 	
 	@POST
