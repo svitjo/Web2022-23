@@ -35,6 +35,7 @@ public class UserDAO {
 	public UserDAO(String contextPath) {
 		this.contextPath = contextPath;
 		loadUsers();
+		addAdminFromFile();
 	}
 	
 	public User findByUsernameAndPassword(String username, String password) {
@@ -127,8 +128,32 @@ public class UserDAO {
 	        saveUsers();
 	        return user;
 	    } else {
-	        throw new IllegalArgumentException("RentACarObject with ID " + user.getId() + " does not exist.");
+	        throw new IllegalArgumentException("User with ID " + user.getId() + " does not exist.");
 	    }
+	}
+	
+	public User addAdminFromFile() {
+	    BufferedReader reader = null;
+	    try {
+	        File file = new File(contextPath + "storage\\admin.txt");
+	        reader = new BufferedReader(new FileReader(file));
+	        String json = reader.lines().collect(Collectors.joining());
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        List<User> admins = objectMapper.readValue(json, new TypeReference<List<User>>(){});
+	        User admin = admins.get(0); // IMAM JEDNOG ADMINA
+	        users.put(admin.getId(), admin);
+	        return admin;
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        if (reader != null) {
+	            try {
+	                reader.close();
+	            } catch (Exception e) {
+	            }
+	        }
+	    }
+	    return null;
 	}
 	
 	public void saveUsers() {
