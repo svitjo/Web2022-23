@@ -19,7 +19,7 @@ Vue.component("customer", {
 		            <a class="nav-link" aria-current="page" href="/RentACar/#/customer/profile">
 		              Profile
 		            </a>
-		          </li>
+		          </li> 
 		        </ul>
 		      </div>
 		    </nav>

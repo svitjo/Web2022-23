@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -53,7 +54,7 @@ public class RentACarObjectService {
 	@GET
 	@Path("/getById")
 	@Produces(MediaType.APPLICATION_JSON)
-	public RentACarObject rentacarobjectView(@QueryParam("id") int r) {
+	public RentACarObject rentACarObjectById(@QueryParam("id") int r) {
 		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
 		return rentacarobjectDAO.findById(r);
 		
@@ -114,5 +115,14 @@ public class RentACarObjectService {
 	public Collection<Vehicle> allVehiclesInRentACarObjects(@QueryParam("id") int id) {
 		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
 		return rentacarobjectDAO.findVehiclesByRentACarObjectId(id);
+	}
+	
+	@DELETE
+	@Path("/delete")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void delete(@QueryParam("id") int id) {
+		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
+		rentacarobjectDAO.deleteRentACarObjectById(id);
 	}
 }

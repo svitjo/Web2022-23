@@ -168,4 +168,11 @@ public class RentACarObjectDAO {
 		    }
 		    return new ArrayList<>(); 
 		}
+		
+		public void deleteRentACarObjectById(int id) {
+		    RentACarObject rentACarObject = rentacarobjects.remove(id);
+		    if (rentACarObject != null) {
+		    	saveRentACarObjects();
+		    }
+		}
 }

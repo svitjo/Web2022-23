@@ -28,7 +28,6 @@ template: `
             <h2 class="featurette-heading">{{rentacarobject.objectName}}</h2>
             <p style="color: blue">{{rentacarobject.objectStatus}}</p>
             <p class="lead">{{rentacarobject.location.streetName}}, {{rentacarobject.location.city}} {{rentacarobject.location.zipCode}}</p>
-            <p class="lead text-muted">{{rentacarobject.location.longitude}}, {{rentacarobject.location.latitude}}</p>
         </div>
         <div class="col-md-6">
             <img v-bind:src="rentacarobject.logo" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid" width="500" height="500" alt="Rent-a-Car Object Image">
