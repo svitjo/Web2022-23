@@ -1,17 +1,11 @@
 package entities;
 
 public class Comment {
-	private Customer customer;
+	private User user;
 	private RentACarObject object;
 	private String commentText;
 	private double rating;
-	
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+
 	public RentACarObject getObject() {
 		return object;
 	}
@@ -29,5 +23,11 @@ public class Comment {
 	}
 	public void setRating(double rating) {
 		this.rating = rating;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

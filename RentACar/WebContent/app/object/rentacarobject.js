@@ -37,7 +37,7 @@ template: `
           <div class="card shadow-sm">
           <img v-bind:src="rentacarobject.logo" class="bg-placeholder-img card-img-top" width="100%" height="225">
             <div class="card-body">
-              <h2>{{rentacarobject.name}}</h2
+              <h2>{{rentacarobject.objectName}}</h2
               <div>
               <p style="margin-bottom: .1rem;"> {{rentacarobject.location.streetName}} </p>
               <p>{{rentacarobject.location.zipCode}} {{rentacarobject.location.city}}</p>

@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,4 +151,21 @@ public class RentACarObjectDAO {
 
 	        return sortedObjects;
 	    }
+		
+		public RentACarObject findByManagerId(int managerId) {
+		    for (RentACarObject r : rentacarobjects.values()) {
+		        if (r.getManagerId() == managerId) {
+		            return r;
+		        }
+		    }
+		    return null;
+		}
+		
+		public Collection<Vehicle> findVehiclesByRentACarObjectId(int rentacarobjectId) {
+		    RentACarObject rentACarObject = rentacarobjects.get(rentacarobjectId);
+		    if (rentACarObject != null) {
+		        return rentACarObject.getVehicle();
+		    }
+		    return new ArrayList<>(); 
+		}
 }

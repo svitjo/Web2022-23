@@ -44,19 +44,18 @@ public class RentACarObjectService {
 	@GET
 	@Path("/allRentACarObjects")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<RentACarObject> allRestaurants() {
+	public Collection<RentACarObject> allRentACarObjectss() {
 		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
 		rentacarobjectDAO.loadRentACarObjects();
 		return rentacarobjectDAO.findAll();
 	}
 	
-	@POST
+	@GET
 	@Path("/getById")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public RentACarObject restourantView(RentACarObject r) {
+	public RentACarObject rentacarobjectView(@QueryParam("id") int r) {
 		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
-		return rentacarobjectDAO.findById(r.getId());
+		return rentacarobjectDAO.findById(r);
 		
 	}
 	
@@ -99,5 +98,21 @@ public class RentACarObjectService {
 	public List<RentACarObject> sortedRentACarObjects() {
 		RentACarObjectDAO rentACarObjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
 		return rentACarObjectDAO.sortRentACarObjects();
+	}
+	
+	@GET
+	@Path("/getByManagerId")
+	@Produces(MediaType.APPLICATION_JSON)
+	public RentACarObject getByManagerId(@QueryParam("id") int r) {
+		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
+		return rentacarobjectDAO.findById(r);	
+	}
+	
+	@GET
+	@Path("/allVehiclesInRentACarObjects")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Vehicle> allVehiclesInRentACarObjects(@QueryParam("id") int id) {
+		RentACarObjectDAO rentacarobjectDAO = (RentACarObjectDAO) ctx.getAttribute("rentacarobjectDAO");
+		return rentacarobjectDAO.findVehiclesByRentACarObjectId(id);
 	}
 }

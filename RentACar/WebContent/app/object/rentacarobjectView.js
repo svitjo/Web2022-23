@@ -44,9 +44,8 @@ template: `
         </li>
     </ul>
     <div class="tab-content" id="rentacarobjectTabContent">
-        <div class="tab-pane fade show active" id="vehicles" role="tabpanel" aria-labelledby="vehicles-tab">Vehicles</div>
-        <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">Comments</div>
-    </div>
+        <div class="tab-pane fade active show products-container" id="products" role="tabpanel" aria-labelledby="products-tab">
+	</div></div>
 </div>
 
 `

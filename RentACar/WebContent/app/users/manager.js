@@ -21,12 +21,21 @@ Vue.component("manager", {
 		         
 		        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
 		          <span>My data</span>
-		        </h6>
+		        </h6>  
 		          <li class="nav-item">
 		            <a class="nav-link" aria-current="page" href="/RentACar/#/manager/profile">
 		              Profile
 		            </a>
-		          </li>   
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" aria-current="page" href="/RentACar/#/manager/myRentACarObject">
+		              My Rent A Car Object
+		            </a>
+		          </li>
+		           <li class="nav-item">
+		            <a class="nav-link" aria-current="page" href="/RentACar/#/manager/vehicle">
+		             Vehicles
+		            </a>
 		        </ul>
 		      </div>
 		    </nav>

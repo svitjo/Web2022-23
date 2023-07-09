@@ -22,9 +22,26 @@ Vue.component("admin", {
 		              Dashboard
 		            </a>
 		          </li>
-		           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-		          <span>My data</span>
-		        </h6>
+		          <li class="nav-item">
+		            <a class="nav-link active" aria-current="page" href="/RentACar/#/admin/profile">
+		              Profile
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="/RentACar/#/admin/managers">
+		              Managers
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="/RentACar/#/admin/customers">
+		              Customers
+		            </a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="/RentACar/#/admin/rentacarobjects">
+		              Rent a car object
+		            </a>
+		          </li>
 		        </ul>
 		      </div>
 		    </nav>

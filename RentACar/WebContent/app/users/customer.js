@@ -16,7 +16,7 @@ Vue.component("customer", {
 		          <span>My data</span>
 		        </h6>
 		          <li class="nav-item">
-		            <a class="nav-link" aria-current="page" href="/RentACar/#/customer">
+		            <a class="nav-link" aria-current="page" href="/RentACar/#/customer/profile">
 		              Profile
 		            </a>
 		          </li>
